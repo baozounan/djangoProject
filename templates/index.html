@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <meta charset="UTF-8">
+    <title>接口测试页面</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link rel="stylesheet" href=" {% static 'layui/css/layui.css' %}"  media="all">
+    <!--清除浏览器默认样式*/-->
+    <style type="text/css">
+        *{
+            margin: 0;
+            padding: 0;
+        }
+    </style>
+</head>
+<body style="width: 100%">
+    <div class="div" style="width:30%;float: left" >
+        <form class="layui-form" action="/index/openfg/" method="post" style="width:85%;">
+            {% csrf_token %}
+            <fieldset class="layui-elem-field layui-field-title" style="width: 85%">
+                <legend>模拟器启动选项</legend>
+            </fieldset>
+            <div class="layui-form-item" style="width:85%;" >
+                <label class="layui-form-label" >仿真配置</label>
+                <div class="layui-input-block" style="width:85%" >
+                <input type="checkbox" name="terrasync" title="自动下载地景">
+                <input type="checkbox" name="fdm" title="空气动力学模型">
+                </div>
+            </div>
+            <div class="layui-form-item"  style="width:85%;">
+                <label class="layui-form-label" >机场代码</label>
+                <div class="layui-input-block" >
+                <select name="airport" lay-filter="aihao">
+                    <option value="ZUCG">ZUGH</option>
+                    <option value="ZUSN">ZUSN</option>
+                    <option value="ZUXJ">ZUXJ</option>
+                    <option value="ZULY">ZULY</option>
+                    <option value="ZUCK">ZUCK</option>
+                </select>
+                </div>
+            </div>
+            <div class="layui-form-item" style="width:85%;">
+                <label class="layui-form-label" >机型</label>
+                <div class="layui-input-block" >
+                <select name="aircraft" lay-filter="aihao">
+                    <option value="c172p">c172p</option>
+                    <option value="c172r">c172R</option>
+                    <option value="da42">DA42</option>
+                    <option value="sr22">SR22</option>
+                    <option value="erj145">ERJ145</option>
+                </select>
+                </div>
+            </div>
+            <div class="layui-form-item" style="width:85%;">
+                <label class="layui-form-label" >数据出端口</label>
+                <div class="layui-input-block">
+                <select name="outport" lay-filter="aihao">
+                    <option value="7080">7080</option>
+                </select>
+                </div>
+            </div>
+            <div class="layui-form-item" style="width:85%;">
+                <label class="layui-form-label"  >数据入端口</label>
+                <div class="layui-input-block">
+                <select name="inport" lay-filter="aihao">
+                    <option value="7081">7081</option>
+                </select>
+                </div>
+            </div>
+            <div class="layui-form-item" style="width:85%;">
+                <label class="layui-form-label" >数据发送频率</label>
+                <div class="layui-input-block">
+                <select name="send_frequency" lay-filter="aihao">
+                    <option value="20">20</option>
+                    <option value="15">15</option>
+                    <option value="10">10</option>
+                    <option value="5">5</option>
+                    <option value="1">1</option>
+                </select>
+                </div>
+            </div>
+            <div class="layui-form-item" style="width:85%;">
+                <label class="layui-form-label" >数据接收频率</label>
+                <div class="layui-input-block">
+                <select name="receive_frequency" lay-filter="aihao">
+                    <option value="20">20</option>
+                    <option value="15">15</option>
+                    <option value="10">10</option>
+                    <option value="5">5</option>
+                    <option value="1">1</option>
+                </select>
+                </div>
+            </div>
+            <div class="layui-form-item" style="width:85%">
+                <label class="layui-form-label" >其他配置</label>
+                <div class="layui-input-block">
+                    <input type="text" name="other_config"  autocomplete="off" placeholder="请输入配置项" class="layui-input" >
+                </div>
+            </div>
+            <div class="layui-form-item" style="width:85%">
+                <label class="layui-form-label">模拟器开关</label>
+                <div class="layui-input-block">
+                    <input type="checkbox" name="switch" lay-skin="switch" lay-text="ON|OFF">
+                </div>
+            </div>
+            <div class="layui-form-item" >
+                <div class="layui-input-block" style="width: 40%;margin: auto">
+                    <button type="submit" class="layui-btn" >立即提交</button>
+                </div>
+            </div>
+        </form>
+
+
+
+        <!--配置日志文件-->
+        <form class="layui-form" action="/index/send_message/"  method="post" style="width:85%;">
+               {% csrf_token %}
+            <fieldset class="layui-elem-field layui-field-title" style="width:85%;">
+                <legend>配置日志文件</legend>
+            </fieldset>
+            <div class="layui-form-item" style="width:85%;">
+                <label class="layui-form-label" >目的IP地址</label>
+                <div class="layui-input-block">
+                <select name="ip" lay-filter="aihao" contenteditable="true">
+                    <option value="127.0.0.1">127.0.0.1</option>
+                </select>
+                </div>
+            </div>
+            <div class="layui-form-item" style="width:85%;">
+                <label class="layui-form-label" >目的端口</label>
+                <div class="layui-input-block">
+                <select name="des_port" lay-filter="aihao">
+                    <option value="7081">7081</option>
+                </select>
+                </div>
+            </div>
+            <div class="layui-form-item" style="width:85%;">
+                <label class="layui-form-label"  >数据发送频率</label>
+                <div class="layui-input-block">
+                <select name="send_frequency" lay-filter="aihao">
+                    <option value="20">20</option>
+                    <option value="15">15</option>
+                    <option value="10">10</option>
+                    <option value="5">5</option>
+                    <option value="1">1</option>
+                </select>
+                </div>
+            </div>
+            <div class="layui-form-item" style="width:85%">
+                <label class="layui-form-label" >日志文件路径</label>
+                <div class="layui-input-block">
+                    <input type="text" name="csv_path"  autocomplete="off" placeholder="请输入日志文件路径" class="layui-input" >
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <div class="layui-input-block" style="width: 40%;margin: auto">
+                    <button type="submit" class="layui-btn" onclick="display_iframe(this)">立即提交</button>
+                </div>
+            </div>
+        </form>
+    </div>
+
+    <!--两个视图-->
+    <div class="div2" style="width:70%;float: right;display: none" id="iframe">
+        <iframe src="" id="iframe1" frameborder="1000" width="1000" scrolling="No" height="500" leftmargin="10" topmargin="1000"></iframe>
+        <iframe src="" id="iframe2" frameborder="1000" width="1000" scrolling="Yes" height="500" leftmargin="10" topmargin="100"></iframe>
+    </div>
+
+<script src="{% static "layui/layui.js" %}"  charset="utf-8"></script>
+<script>
+        function display_iframe(id){
+    iframe = document.getElementById("iframe");
+        iframe1 = document.getElementById("iframe1");
+        iframe2 = document.getElementById("iframe2");
+        iframe.style.display="block";
+        iframe1.src="http://localhost:7080/#Map";
+        iframe2.src="http://localhost:7080/aircraft-dir/WebPanel/c172p-webpanel.html";
+
+    }
+
+layui.use(['form', 'layedit', 'laydate'], function(){
+  var form = layui.form
+  ,layer = layui.layer
+  ,layedit = layui.layedit
+  ,laydate = layui.laydate;
+
+  //日期
+  laydate.render({
+    elem: '#date'
+  });
+  laydate.render({
+    elem: '#date1'
+  });
+
+  //创建一个编辑器
+  var editIndex = layedit.build('LAY_demo_editor');
+
+  //自定义验证规则
+  form.verify({
+    title: function(value){
+      if(value.length < 5){
+        return '标题至少得5个字符啊';
+      }
+    }
+    ,pass: [
+      /^[\S]{6,12}$/
+      ,'密码必须6到12位，且不能出现空格'
+    ]
+    ,content: function(value){
+      layedit.sync(editIndex);
+    }
+  });
+
+  //监听指定开关
+  form.on('switch(switchTest)', function(data){
+    layer.msg('开关checked：'+ (this.checked ? 'true' : 'false'), {
+      offset: '6px'
+    });
+    layer.tips('温馨提示：请注意开关状态的文字可以随意定义，而不仅仅是ON|OFF', data.othis)
+  });
+
+  //监听提交
+<!--  form.on('submit(demo1)', function(data){-->
+<!--    layer.alert(JSON.stringify(data.field), {-->
+<!--      title: '最终的提交'-->
+<!--    })                       lay-submit="demo1" lay-filter="demo1"                                          -->
+<!--    return false;-->
+<!--  });-->
+
+
+//ajax监听提交
+
+<!--  form.on('submit(demo1)', function(data){-->
+<!--  layer.alert(JSON.stringify(data.field));-->
+<!--   $.ajaxSetup({data: {csrfmiddlewaretoken: '{{ csrf_token }}'}});-->
+<!--   $.ajax({-->
+<!--     type:"POST",-->
+<!--     url:"/openfg/",-->
+<!--     data:JSON.stringify(data.field),-->
+<!--     datatype:JSON,-->
+<!--     success:function(con_data1){-->
+<!--     console.log("模拟器打开成功")-->
+<!--  	},-->
+<!--  	error:function(res){-->
+<!--  		console.log(res)-->
+<!--  	}-->
+<!--  })-->
+<!--  });-->
+
+
+  //表单赋值
+  layui.$('#LAY-component-form-setval').on('click', function(){
+
+    form.val('example', {
+      "username": "贤心" // "name": "value"
+      ,"password": "123456"
+      ,"interest": 1
+      ,"like[write]": true //复选框选中状态
+      ,"close": true //开关状态
+      ,"sex": "女"
+      ,"desc": "我爱 layui"
+    });
+  });
+
+  //表单取值
+  layui.$('#LAY-component-form-getval').on('click', function(data){
+    var data = form.val('example');
+    console.log(data);
+    alert(JSON.stringify(data));
+  });
+});
+
+layui.use('upload', function(){
+console.log(this.file);
+  var upload = layui.upload;
+  //执行实例
+  var uploadInst = upload.render({
+    elem: '#choose_fgpath' //绑定元素
+    ,accept:'file'
+    ,exts:'csv'
+    ,method:'POST'
+    ,auto:'false'
+    ,url:'/upload/' //上传接口
+    ,done: function(res){
+      //上传完毕回调
+    }
+    ,error: function(){
+      //请求异常回调
+    }
+  });
+});
+</script>
+</body>
+</html>
