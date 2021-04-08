@@ -77,7 +77,7 @@ def send_message(request):
     send_frequency_int = int(send_frequency)
     #file = request.POST.get("file")
     csv_path = request.POST.get("csv_path")
-    send.get_csv_message(csv_path,send_frequency_int,ip,des_port_int)
+    send.send_csv_message(csv_path,send_frequency_int,ip,des_port_int)
     return render(request, 'index.html', context)
 
 
