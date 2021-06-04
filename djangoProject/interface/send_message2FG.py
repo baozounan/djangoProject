@@ -3,11 +3,11 @@ import time
 
 
 '''
-通过传入的
+通过传入的csv文件路径，发送频率，地址和端口进行数据发送
 '''
+
+
 def send_csv_message(csv_path, frequency, ip, port):
-    print(ip)
-    print(port)
     if frequency <= 0:
         frequency = 20
 
